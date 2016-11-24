@@ -1,0 +1,14 @@
+{
+    "name": "scool/inventory",
+    "type": "library",
+    "require": {
+        "laravel/framework": "^5.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "manuelblanch",
+            "email": "manuelblanch@iesebre.com"
+        }
+    ]
+}
