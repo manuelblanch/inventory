@@ -1,4 +1,6 @@
 # :inventory
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/manuelblanch/inventory/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/manuelblanch/inventory/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/manuelblanch/inventory/badges/build.png?b=master)](https://scrutinizer-ci.com/g/manuelblanch/inventory/build-status/master)
 
 ## Installation
 
