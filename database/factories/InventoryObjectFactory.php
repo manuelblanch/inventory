@@ -26,13 +26,13 @@ $factory->define(Inventory::class, function (Faker\Generator $faker) {
         'location_id' => $faker->randomDigit,
         'quantity'=> $faker->randomDigit,
         'price' => $faker->sentence,
-        'money_source_id' =>randomDigit,
-        'provider_id' =>randomDigit,
-        'preservation_state' =>sentece,
-        'study_id' =>randomDigit,
-        'mainOrganizationalUnitId' =>randomDigit,
-        'Timestamps' =>sentence,
-        'userstamps' =>sentence
+        'money_source_id' => $faker->randomDigit,
+        'provider_id' => $faker->randomDigit,
+        'preservation_state' => $faker->sentece,
+        'study_id' => $faker->randomDigit,
+        'mainOrganizationalUnitId' => $faker->randomDigit,
+        'Timestamps' => $faker->sentence,
+        'userstamps' => $faker->sentence
 
     ];
 });
