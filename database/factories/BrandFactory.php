@@ -11,9 +11,10 @@
 */
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Scool\Inventory\Models\Inventory;
+
 $factory->define(Inventory::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word
+        'name' => $faker->word,
 
     ];
 });

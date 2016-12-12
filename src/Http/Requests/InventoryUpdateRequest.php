@@ -1,10 +1,11 @@
 <?php
+
 namespace Scool\Inventory\Http\Requests;
+
 use Illuminate\Foundation\Http\FormRequest;
+
 /**
  * Class InventoryUpdateRequest.
- *
- * @package Scool\Inventory\Http\Requests
  */
 class InventoryUpdateRequest extends FormRequest
 {
@@ -17,6 +18,7 @@ class InventoryUpdateRequest extends FormRequest
     {
         return false;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *

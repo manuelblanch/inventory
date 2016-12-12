@@ -1,5 +1,7 @@
 <?php
+
 namespace Scool\Inventory\Http\Controllers;
+
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Scool\Inventory\Http\Requests\StudyCreateRequest;
@@ -8,8 +10,7 @@ use Scool\Inventory\Repositories\StudyRepository;
 use Scool\Inventory\Validators\StudyValidator;
 
 /**
- * Class StudiesController
- * @package Scool\Inventory\Http\Controllers
+ * Class StudiesController.
  */
 class StudiesController extends Controller
 {
@@ -21,11 +22,13 @@ class StudiesController extends Controller
      * @var StudyValidator
      */
     protected $validator;
+
     public function __construct(StudyRepository $repository, StudyValidator $validator)
     {
         $this->repository = $repository;
-        $this->validator  = $validator;
+        $this->validator = $validator;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,12 +43,14 @@ class StudiesController extends Controller
                 'data' => $studies,
             ]);
         }
+
         return view('studies.index', compact('studies'));
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  StudyCreateRequest $request
+     * @param StudyCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -61,21 +66,24 @@ class StudiesController extends Controller
             if ($request->wantsJson()) {
                 return response()->json($response);
             }
+
             return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
                     'error'   => true,
-                    'message' => $e->getMessageBag()
+                    'message' => $e->getMessageBag(),
                 ]);
             }
+
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -87,25 +95,29 @@ class StudiesController extends Controller
                 'data' => $study,
             ]);
         }
+
         return view('studies.show', compact('study'));
     }
+
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $study = $this->repository->find($id);
+
         return view('studies.edit', compact('study'));
     }
+
     /**
      * Update the specified resource in storage.
      *
-     * @param  StudyUpdateRequest $request
-     * @param  string            $id
+     * @param StudyUpdateRequest $request
+     * @param string             $id
      *
      * @return Response
      */
@@ -121,21 +133,24 @@ class StudiesController extends Controller
             if ($request->wantsJson()) {
                 return response()->json($response);
             }
+
             return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
                     'error'   => true,
-                    'message' => $e->getMessageBag()
+                    'message' => $e->getMessageBag(),
                 ]);
             }
+
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -148,6 +163,7 @@ class StudiesController extends Controller
                 'deleted' => $deleted,
             ]);
         }
+
         return redirect()->back()->with('message', 'Study deleted.');
     }
 }
