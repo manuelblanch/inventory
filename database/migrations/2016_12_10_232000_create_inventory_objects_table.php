@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateInventoryObjectsTable extends Migration
 {
@@ -14,7 +14,6 @@ class CreateInventoryObjectsTable extends Migration
     public function up()
     {
         Schema::create('inventory_objects', function (Blueprint $table) {
-
             $table->increments('id');
             $table->integer('id_public');
             $table->integer('id_extern');
@@ -35,7 +34,6 @@ class CreateInventoryObjectsTable extends Migration
             $table->integer('mainOrganizationalUnitId');
             $table->userstamps();
             $table->timestamps();
-
         });
     }
 
