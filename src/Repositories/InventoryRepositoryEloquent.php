@@ -1,18 +1,17 @@
 <?php
+
 namespace Scool\Inventory\Repositories;
-use Prettus\Repository\Eloquent\BaseRepository;
+
 use Prettus\Repository\Criteria\RequestCriteria;
-use Scool\Inventory\Repositories\AttendanceRepository;
-use Scool\Inventory\Models\Attendance;
-use Scool\Inventory\Validators\AttendanceValidator;
+use Prettus\Repository\Eloquent\BaseRepository;
+
 /**
- * Class InventoryRepositoryEloquent
- * @package namespace App\Repositories;
+ * Class InventoryRepositoryEloquent.
  */
 class InventoryRepositoryEloquent extends BaseRepository implements InventoryRepository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -20,8 +19,9 @@ class InventoryRepositoryEloquent extends BaseRepository implements InventoryRep
     {
         return Inventory::class;
     }
+
     /**
-     * Specify Validator class name
+     * Specify Validator class name.
      *
      * @return mixed
      */
@@ -29,8 +29,9 @@ class InventoryRepositoryEloquent extends BaseRepository implements InventoryRep
     {
         return InventoryValidator::class;
     }
+
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {
