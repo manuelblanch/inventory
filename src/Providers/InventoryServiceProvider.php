@@ -19,6 +19,10 @@ class InventoryServiceProvider extends ServiceProvider
             define('SCOOL_INVENTORY_PATH', realpath(__DIR__.'/../../'));
         }
         $this->app->register(NamesServiceProvider::class);
+        $this->app->bind(\Scool\Inventory\Repositories\StudyRepository::class, \Scool\Inventory\Repositories\StudyRepositoryEloquent::class);
+        $this->app->bind(StatsRepositoryInterface::class,function() {
+            return new CacheableStatsRepository(new StatsRepository());
+        });
     }
 
     /**
@@ -39,7 +43,7 @@ class InventoryServiceProvider extends ServiceProvider
      */
     private function loadMigrations()
     {
-        $this->loadMigrationsFrom(SCOOL_CURRICULUM_PATH.'/database/migrations');
+        $this->loadMigrationsFrom(SCOOL_INVENTORY_PATH.'/database/migrations');
     }
 
     /**
@@ -48,7 +52,7 @@ class InventoryServiceProvider extends ServiceProvider
     private function publishFactories()
     {
         $this->publishes(
-            ScoolCurriculum::factories(), 'scool_curriculum'
+            ScoolInventory::factories(), 'scool_inventory'
         );
     }
 
@@ -58,17 +62,17 @@ class InventoryServiceProvider extends ServiceProvider
     private function publishConfig()
     {
         $this->publishes(
-            ScoolCurriculum::configs(), 'scool_curriculum'
+            ScoolInventory::configs(), 'scool_inventory'
         );
         $this->mergeConfigFrom(
-            SCOOL_CURRICULUM_PATH.'/config/curriculum.php', 'scool_curriculum'
+            SCOOL_INVENTORY_PATH.'/config/inventory.php', 'scool_inventory'
         );
     }
 
     private function publishTests()
     {
         $this->publishes(
-            [SCOOL_CURRICULUM_PATH.'/tests/CurriculumTest.php' => 'tests/CurriculumTest.php'],
+            [SCOOL_INVENTORY_PATH.'/tests/InventoryTest.php' => 'tests/InventoryTest.php'],
             'scool_curriculum'
         );
     }
