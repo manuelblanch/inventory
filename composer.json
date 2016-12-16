@@ -2,7 +2,11 @@
     "name": "scool/inventory",
     "type": "library",
     "require": {
-        "laravel/framework": "^5.3"
+        "acacha/names": "^0.2.1",
+        "barryvdh/laravel-debugbar": "^2.3",
+        "barryvdh/laravel-ide-helper": "^2.2",
+        "laravel/framework": "^5.3",
+        "spatie/laravel-permission": "^1.5"
     },
     "homepage": "https://github.com/manuelblanch/inventory",
     "license": "MIT",
@@ -48,6 +52,3 @@
         "sort-packages": true
     }
 }
-
-
-
