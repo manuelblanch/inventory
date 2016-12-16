@@ -4,6 +4,8 @@ namespace Scool\Inventory\Providers;
 
 use Acacha\Names\Providers\NamesServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Acacha\Stateful\Providers\StatatefulServiceProvider;
+use Scool\Inventory\ScoolInventory;
 
 /**
  * Class InventoryServiceProvider.
@@ -19,8 +21,11 @@ class InventoryServiceProvider extends ServiceProvider
             define('SCOOL_INVENTORY_PATH', realpath(__DIR__.'/../../'));
         }
         $this->app->register(NamesServiceProvider::class);
+        $this->app->bind(\Scool\Inventory\Repositories\StudyRepository::class, \Scool\Inventory\Repositories\StudyRepositoryEloquent::class);
+        $this->app->bind(StatsRepositoryInterface::class,function() {
+            return new CacheableStatsRepository(new StatsRepository());
+        });
     }
-
     /**
      * Bootstrap package services.
      *
@@ -28,48 +33,60 @@ class InventoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->defineRoutes();
         $this->loadMigrations();
         $this->publishFactories();
         $this->publishConfig();
         $this->publishTests();
     }
-
     /**
      * Load migrations.
      */
     private function loadMigrations()
     {
-        $this->loadMigrationsFrom(SCOOL_CURRICULUM_PATH.'/database/migrations');
+        $this->loadMigrationsFrom(SCOOL_INVENTORY_PATH.'/database/migrations');
     }
-
     /**
      * Publish factories.
      */
     private function publishFactories()
     {
         $this->publishes(
-            ScoolCurriculum::factories(), 'scool_curriculum'
+            ScoolInventory::factories(), 'scool_inventory'
         );
     }
-
     /**
      * Publish config.
      */
     private function publishConfig()
     {
         $this->publishes(
-            ScoolCurriculum::configs(), 'scool_curriculum'
+            ScoolInventory::configs(), 'scool_inventory'
         );
         $this->mergeConfigFrom(
-            SCOOL_CURRICULUM_PATH.'/config/curriculum.php', 'scool_curriculum'
+            SCOOL_INVENTORY_PATH.'/config/inventory.php', 'scool_inventory'
         );
     }
-
     private function publishTests()
     {
         $this->publishes(
-            [SCOOL_CURRICULUM_PATH.'/tests/CurriculumTest.php' => 'tests/CurriculumTest.php'],
-            'scool_curriculum'
+            [SCOOL_INVENTORY_PATH.'/tests/InventoryTest.php' => 'tests/InventoryTest.php'],
+            'scool_inventory'
         );
+    }
+
+    protected function defineRoutes()
+    {
+        if (!$this->app->routesAreCached()) {
+            $router = app('router');
+            $router->group(['namespace' => 'Scool\Inventory\Http\Controllers'], function () {
+            require __DIR__.'/../Http/routes.php';
+            });
+        }
+    }
+
+    private function registerStatefulEloquentServiceProvider ()
+    {
+        $this->app->register(StatefulServiceProvider::class);
     }
 }
