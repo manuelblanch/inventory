@@ -71,11 +71,9 @@ class InventoryServiceProvider extends ServiceProvider
     {
         $this->publishes(
             [SCOOL_INVENTORY_PATH.'/tests/InventoryTest.php' => 'tests/InventoryTest.php'],
-<<<<<<< HEAD
+
             'scool_inventory'
-=======
-            'scool_curriculum'
->>>>>>> 80af1b0c8bb867379f66912ed39f99dd26f04530
+
         );
     }
 
@@ -89,7 +87,7 @@ class InventoryServiceProvider extends ServiceProvider
         }
     }
 
-    private function registerStatefulEloquentServiceProvider ()
+    private function registerStatefulEloquentServiceProvider()
     {
         $this->app->register(StatefulServiceProvider::class);
     }
