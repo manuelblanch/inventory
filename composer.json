@@ -2,10 +2,12 @@
     "name": "scool/inventory",
     "type": "library",
     "require": {
-        "acacha/names": "^0.2.1",
+        "acacha/names": "dev-master",
         "barryvdh/laravel-debugbar": "^2.3",
         "barryvdh/laravel-ide-helper": "^2.2",
         "laravel/framework": "^5.3",
+        "prettus/l5-repository": "^2.6",
+        "scool/foundation": "^0.1.0",
         "spatie/laravel-permission": "^1.5"
     },
     "homepage": "https://github.com/manuelblanch/inventory",
