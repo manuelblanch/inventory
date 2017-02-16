@@ -4,7 +4,6 @@ namespace Scool\Inventory\Providers;
 
 use Acacha\Names\Providers\NamesServiceProvider;
 use Illuminate\Support\ServiceProvider;
-use Acacha\Stateful\Providers\StatatefulServiceProvider;
 use Scool\Inventory\ScoolInventory;
 
 /**
@@ -22,10 +21,11 @@ class InventoryServiceProvider extends ServiceProvider
         }
         $this->app->register(NamesServiceProvider::class);
         $this->app->bind(\Scool\Inventory\Repositories\StudyRepository::class, \Scool\Inventory\Repositories\StudyRepositoryEloquent::class);
-        $this->app->bind(StatsRepositoryInterface::class,function() {
+        $this->app->bind(StatsRepositoryInterface::class, function () {
             return new CacheableStatsRepository(new StatsRepository());
         });
     }
+
     /**
      * Bootstrap package services.
      *
@@ -39,6 +39,7 @@ class InventoryServiceProvider extends ServiceProvider
         $this->publishConfig();
         $this->publishTests();
     }
+
     /**
      * Load migrations.
      */
@@ -46,6 +47,7 @@ class InventoryServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(SCOOL_INVENTORY_PATH.'/database/migrations');
     }
+
     /**
      * Publish factories.
      */
@@ -55,6 +57,7 @@ class InventoryServiceProvider extends ServiceProvider
             ScoolInventory::factories(), 'scool_inventory'
         );
     }
+
     /**
      * Publish config.
      */
@@ -67,6 +70,7 @@ class InventoryServiceProvider extends ServiceProvider
             SCOOL_INVENTORY_PATH.'/config/inventory.php', 'scool_inventory'
         );
     }
+
     private function publishTests()
     {
         $this->publishes(
@@ -82,7 +86,7 @@ class InventoryServiceProvider extends ServiceProvider
         if (!$this->app->routesAreCached()) {
             $router = app('router');
             $router->group(['namespace' => 'Scool\Inventory\Http\Controllers'], function () {
-            require __DIR__.'/../Http/routes.php';
+                require __DIR__.'/../Http/routes.php';
             });
         }
     }
