@@ -3,49 +3,42 @@ namespace Scool\Inventory\Providers;
 use Acacha\Names\Providers\NamesServiceProvider;
 use Acacha\Stateful\Providers\StatefulServiceProvider;
 use Illuminate\Support\ServiceProvider;
-use Scool\Inventory\ScoolInventory;
-use Scool\Inventory\Stats\CacheableStatsRepository;
-use Scool\Inventory\Stats\Contracts\StatsRepository as StatsRepositoryInterface;
-use Scool\Inventory\Stats\StatsRepository;
+use Scool\Curriculum\ScoolCurriculum;
+use Scool\Curriculum\Stats\CacheableStatsRepository;
+use Scool\Curriculum\Stats\Contracts\StatsRepository as StatsRepositoryInterface;
+use Scool\Curriculum\Stats\StatsRepository;
 /**
- * Class InventoryServiceProvider.
+ * Class CurriculumServiceProvider.
  *
- * @package Scool\Inventory\Providers
+ * @package Scool\Curriculum\Providers
  */
-class InventoryServiceProvider extends ServiceProvider
+class CurriculumServiceProvider extends ServiceProvider
 {
     /**
      * Register package services.
      */
     public function register()
     {
-        if (!defined('SCOOL_INVENTORY_PATH')) {
-            define('SCOOL_INVENTORY_PATH', realpath(__DIR__.'/../../'));
+        if (!defined('SCOOL_CURRICULUM_PATH')) {
+            define('SCOOL_CURRICULUM_PATH', realpath(__DIR__.'/../../'));
         }
-<<<<<<< HEAD
         $this->registerNamesServiceProvider();
         $this->registerStatefulEloquentServiceProvider();
         $this->bindRepositories();
         $this->app->bind(StatsRepositoryInterface::class,function() {
-=======
-        $this->app->register(NamesServiceProvider::class);
-        $this->app->bind(\Scool\Inventory\Repositories\StudyRepository::class, \Scool\Inventory\Repositories\StudyRepositoryEloquent::class);
-        $this->app->bind(StatsRepositoryInterface::class, function () {
->>>>>>> af3b7660d20378ee776d8126fd76cd529a6c647e
             return new CacheableStatsRepository(new StatsRepository());
         });
     }
-
     /**
      * Bind repositories
      */
     protected function bindRepositories()
     {
         $this->app->bind(
-            \Scool\Inventory\Repositories\StudyRepository::class,
-            \Scool\Inventory\Repositories\StudyRepositoryEloquent::class);
-        $this->app->bind(\Scool\Inventory\Repositories\TodoRepository::class, \Scool\Inventory\Repositories\TodoRepositoryEloquent::class);
-        $this->app->bind(\Scool\Inventory\Repositories\ShitRepository::class, \Scool\Inventory\Repositories\ShitRepositoryEloquent::class);
+            \Scool\Curriculum\Repositories\StudyRepository::class,
+            \Scool\Curriculum\Repositories\StudyRepositoryEloquent::class);
+        $this->app->bind(\Scool\Curriculum\Repositories\TodoRepository::class, \Scool\Curriculum\Repositories\TodoRepositoryEloquent::class);
+        $this->app->bind(\Scool\Curriculum\Repositories\ShitRepository::class, \Scool\Curriculum\Repositories\ShitRepositoryEloquent::class);
         //:end-bindings:
     }
     /**
@@ -78,15 +71,14 @@ class InventoryServiceProvider extends ServiceProvider
         $this->publishConfig();
         $this->publishTests();
     }
-
     /**
-     * Define the inventory routes.
+     * Define the curriculum routes.
      */
     protected function defineRoutes()
     {
         if (!$this->app->routesAreCached()) {
             $router = app('router');
-            $router->group(['namespace' => 'Scool\Inventory\Http\Controllers'], function () {
+            $router->group(['namespace' => 'Scool\Curriculum\Http\Controllers'], function () {
                 require __DIR__.'/../Http/routes.php';
             });
         }
@@ -96,67 +88,46 @@ class InventoryServiceProvider extends ServiceProvider
      */
     private function loadViews()
     {
-        $this->loadViewsFrom(SCOOL_INVENTORY_PATH . '/resources/views', 'inventory');
+        $this->loadViewsFrom(SCOOL_CURRICULUM_PATH . '/resources/views', 'curriculum');
     }
     /**
      * Load migrations.
      */
     private function loadMigrations()
     {
-        $this->loadMigrationsFrom(SCOOL_INVENTORY_PATH . '/database/migrations');
+        $this->loadMigrationsFrom(SCOOL_CURRICULUM_PATH . '/database/migrations');
     }
-
     /**
      * Publish factories.
      */
     private function publishFactories()
     {
         $this->publishes(
-            ScoolInventory::factories(),"scool_inventory"
+            ScoolCurriculum::factories(),"scool_curriculum"
         );
     }
-
     /**
      * Publish config.
      */
     private function publishConfig() {
         $this->publishes(
-            ScoolInventory::configs(),"scool_inventory"
+            ScoolCurriculum::configs(),"scool_curriculum"
         );
         $this->mergeConfigFrom(
-            SCOOL_INVENTORY_PATH . '/config/inventory.php', 'scool_inventory'
+            SCOOL_CURRICULUM_PATH . '/config/curriculum.php', 'scool_curriculum'
         );
     }
-<<<<<<< HEAD
     /**
      * Publich tests.
      */
-=======
-
->>>>>>> af3b7660d20378ee776d8126fd76cd529a6c647e
     private function publishTests()
     {
         $this->publishes(
-            [SCOOL_INVENTORY_PATH .'/tests/InventoryTest.php' => 'tests/InventoryTest.php'] ,
-            'scool_inventory'
+            [SCOOL_CURRICULUM_PATH .'/tests/CurriculumTest.php' => 'tests/CurriculumTest.php'] ,
+            'scool_curriculum'
         );
     }
-<<<<<<< HEAD
-=======
-
-    protected function defineRoutes()
-    {
-        if (!$this->app->routesAreCached()) {
-            $router = app('router');
-            $router->group(['namespace' => 'Scool\Inventory\Http\Controllers'], function () {
-                require __DIR__.'/../Http/routes.php';
-            });
-        }
-    }
-
-    private function registerStatefulEloquentServiceProvider()
-    {
-        $this->app->register(StatefulServiceProvider::class);
-    }
->>>>>>> af3b7660d20378ee776d8126fd76cd529a6c647e
 }
+
+
+
