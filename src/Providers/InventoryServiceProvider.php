@@ -3,24 +3,24 @@ namespace Scool\Inventory\Providers;
 use Acacha\Names\Providers\NamesServiceProvider;
 use Acacha\Stateful\Providers\StatefulServiceProvider;
 use Illuminate\Support\ServiceProvider;
-use Scool\Curriculum\ScoolCurriculum;
-use Scool\Curriculum\Stats\CacheableStatsRepository;
-use Scool\Curriculum\Stats\Contracts\StatsRepository as StatsRepositoryInterface;
-use Scool\Curriculum\Stats\StatsRepository;
+use Scool\Inventory\ScoolInventory;
+use Scool\Inventory\Stats\CacheableStatsRepository;
+use Scool\Inventory\Stats\Contracts\StatsRepository as StatsRepositoryInterface;
+use Scool\Inventory\Stats\StatsRepository;
 /**
- * Class CurriculumServiceProvider.
+ * Class InventoryServiceProvider.
  *
- * @package Scool\Curriculum\Providers
+ * @package Scool\Inventory\Providers
  */
-class CurriculumServiceProvider extends ServiceProvider
+class InventoryServiceProvider extends ServiceProvider
 {
     /**
      * Register package services.
      */
     public function register()
     {
-        if (!defined('SCOOL_CURRICULUM_PATH')) {
-            define('SCOOL_CURRICULUM_PATH', realpath(__DIR__.'/../../'));
+        if (!defined('SCOOL_INVENTORY_PATH')) {
+            define('SCOOL_INVENTORY_PATH', realpath(__DIR__.'/../../'));
         }
         $this->registerNamesServiceProvider();
         $this->registerStatefulEloquentServiceProvider();
@@ -35,10 +35,10 @@ class CurriculumServiceProvider extends ServiceProvider
     protected function bindRepositories()
     {
         $this->app->bind(
-            \Scool\Curriculum\Repositories\StudyRepository::class,
-            \Scool\Curriculum\Repositories\StudyRepositoryEloquent::class);
-        $this->app->bind(\Scool\Curriculum\Repositories\TodoRepository::class, \Scool\Curriculum\Repositories\TodoRepositoryEloquent::class);
-        $this->app->bind(\Scool\Curriculum\Repositories\ShitRepository::class, \Scool\Curriculum\Repositories\ShitRepositoryEloquent::class);
+            \Scool\Inventory\Repositories\StudyRepository::class,
+            \Scool\Inventory\Repositories\StudyRepositoryEloquent::class);
+        $this->app->bind(\Scool\Inventory\Repositories\TodoRepository::class, \Scool\Inventory\Repositories\TodoRepositoryEloquent::class);
+        $this->app->bind(\Scool\Inventory\Repositories\ShitRepository::class, \Scool\Inventory\Repositories\ShitRepositoryEloquent::class);
         //:end-bindings:
     }
     /**
@@ -78,7 +78,7 @@ class CurriculumServiceProvider extends ServiceProvider
     {
         if (!$this->app->routesAreCached()) {
             $router = app('router');
-            $router->group(['namespace' => 'Scool\Curriculum\Http\Controllers'], function () {
+            $router->group(['namespace' => 'Scool\Inventory\Http\Controllers'], function () {
                 require __DIR__.'/../Http/routes.php';
             });
         }
@@ -88,14 +88,14 @@ class CurriculumServiceProvider extends ServiceProvider
      */
     private function loadViews()
     {
-        $this->loadViewsFrom(SCOOL_CURRICULUM_PATH . '/resources/views', 'curriculum');
+        $this->loadViewsFrom(SCOOL_INVENTORY_PATH . '/resources/views', 'inventory');
     }
     /**
      * Load migrations.
      */
     private function loadMigrations()
     {
-        $this->loadMigrationsFrom(SCOOL_CURRICULUM_PATH . '/database/migrations');
+        $this->loadMigrationsFrom(SCOOL_INVENTORY_PATH . '/database/migrations');
     }
     /**
      * Publish factories.
@@ -103,7 +103,7 @@ class CurriculumServiceProvider extends ServiceProvider
     private function publishFactories()
     {
         $this->publishes(
-            ScoolCurriculum::factories(),"scool_curriculum"
+            ScoolInventory::factories(),"scool_inventory"
         );
     }
     /**
@@ -111,10 +111,10 @@ class CurriculumServiceProvider extends ServiceProvider
      */
     private function publishConfig() {
         $this->publishes(
-            ScoolCurriculum::configs(),"scool_curriculum"
+            ScoolInventory::configs(),"scool_inventory"
         );
         $this->mergeConfigFrom(
-            SCOOL_CURRICULUM_PATH . '/config/curriculum.php', 'scool_curriculum'
+            SCOOL_INVENTORY_PATH . '/config/inventory.php', 'scool_inventory'
         );
     }
     /**
@@ -123,8 +123,8 @@ class CurriculumServiceProvider extends ServiceProvider
     private function publishTests()
     {
         $this->publishes(
-            [SCOOL_CURRICULUM_PATH .'/tests/CurriculumTest.php' => 'tests/CurriculumTest.php'] ,
-            'scool_curriculum'
+            [SCOOL_INVENTORY_PATH .'/tests/InventoryTest.php' => 'tests/InventoryTest.php'] ,
+            'scool_inventory'
         );
     }
 }
