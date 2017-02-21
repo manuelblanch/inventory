@@ -22,13 +22,20 @@ class InventoryServiceProvider extends ServiceProvider
         if (!defined('SCOOL_INVENTORY_PATH')) {
             define('SCOOL_INVENTORY_PATH', realpath(__DIR__.'/../../'));
         }
+<<<<<<< HEAD
         $this->registerNamesServiceProvider();
         $this->registerStatefulEloquentServiceProvider();
         $this->bindRepositories();
         $this->app->bind(StatsRepositoryInterface::class,function() {
+=======
+        $this->app->register(NamesServiceProvider::class);
+        $this->app->bind(\Scool\Inventory\Repositories\StudyRepository::class, \Scool\Inventory\Repositories\StudyRepositoryEloquent::class);
+        $this->app->bind(StatsRepositoryInterface::class, function () {
+>>>>>>> af3b7660d20378ee776d8126fd76cd529a6c647e
             return new CacheableStatsRepository(new StatsRepository());
         });
     }
+
     /**
      * Bind repositories
      */
@@ -71,6 +78,7 @@ class InventoryServiceProvider extends ServiceProvider
         $this->publishConfig();
         $this->publishTests();
     }
+
     /**
      * Define the inventory routes.
      */
@@ -97,6 +105,7 @@ class InventoryServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(SCOOL_INVENTORY_PATH . '/database/migrations');
     }
+
     /**
      * Publish factories.
      */
@@ -106,6 +115,7 @@ class InventoryServiceProvider extends ServiceProvider
             ScoolInventory::factories(),"scool_inventory"
         );
     }
+
     /**
      * Publish config.
      */
@@ -117,9 +127,13 @@ class InventoryServiceProvider extends ServiceProvider
             SCOOL_INVENTORY_PATH . '/config/inventory.php', 'scool_inventory'
         );
     }
+<<<<<<< HEAD
     /**
      * Publich tests.
      */
+=======
+
+>>>>>>> af3b7660d20378ee776d8126fd76cd529a6c647e
     private function publishTests()
     {
         $this->publishes(
@@ -127,4 +141,22 @@ class InventoryServiceProvider extends ServiceProvider
             'scool_inventory'
         );
     }
+<<<<<<< HEAD
+=======
+
+    protected function defineRoutes()
+    {
+        if (!$this->app->routesAreCached()) {
+            $router = app('router');
+            $router->group(['namespace' => 'Scool\Inventory\Http\Controllers'], function () {
+                require __DIR__.'/../Http/routes.php';
+            });
+        }
+    }
+
+    private function registerStatefulEloquentServiceProvider()
+    {
+        $this->app->register(StatefulServiceProvider::class);
+    }
+>>>>>>> af3b7660d20378ee776d8126fd76cd529a6c647e
 }
