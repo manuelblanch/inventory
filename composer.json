@@ -1,5 +1,5 @@
 {
-    "name": "scool/inventory",
+    "name": "admin/inventory",
     "type": "library",
     "require": {
         "acacha/names": "dev-master",
