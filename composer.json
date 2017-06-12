@@ -1,5 +1,5 @@
 {
-    "name": "adminlaravel/inventory",
+    "name": "mblanch/inventory",
     "type": "library",
     "require": {
         "acacha/names": "dev-master",
