@@ -1,5 +1,7 @@
 <?php
+
 namespace Scool\Inventory\Providers;
+
 use Acacha\Names\Providers\NamesServiceProvider;
 use Acacha\Stateful\Providers\StatefulServiceProvider;
 use Illuminate\Support\ServiceProvider;
@@ -7,10 +9,9 @@ use Scool\Inventory\ScoolInventory;
 use Scool\Inventory\Stats\CacheableStatsRepository;
 use Scool\Inventory\Stats\Contracts\StatsRepository as StatsRepositoryInterface;
 use Scool\Inventory\Stats\StatsRepository;
+
 /**
  * Class InventoryServiceProvider.
- *
- * @package Scool\Inventory\Providers
  */
 class InventoryServiceProvider extends ServiceProvider
 {
@@ -25,12 +26,13 @@ class InventoryServiceProvider extends ServiceProvider
         $this->registerNamesServiceProvider();
         $this->registerStatefulEloquentServiceProvider();
         $this->bindRepositories();
-        $this->app->bind(StatsRepositoryInterface::class,function() {
+        $this->app->bind(StatsRepositoryInterface::class, function () {
             return new CacheableStatsRepository(new StatsRepository());
         });
     }
+
     /**
-     * Bind repositories
+     * Bind repositories.
      */
     protected function bindRepositories()
     {
@@ -41,22 +43,23 @@ class InventoryServiceProvider extends ServiceProvider
         $this->app->bind(\Scool\Inventory\Repositories\ShitRepository::class, \Scool\Inventory\Repositories\ShitRepositoryEloquent::class);
         //:end-bindings:
     }
+
     /**
      * Register acacha/stateful-eloquent Service Provider.
-     *
      */
     protected function registerStatefulEloquentServiceProvider()
     {
         $this->app->register(StatefulServiceProvider::class);
     }
+
     /**
      * Register acacha/names Service Provider.
-     *
      */
     protected function registerNamesServiceProvider()
     {
         $this->app->register(NamesServiceProvider::class);
     }
+
     /**
      * Bootstrap package services.
      *
@@ -71,6 +74,7 @@ class InventoryServiceProvider extends ServiceProvider
         $this->publishConfig();
         $this->publishTests();
     }
+
     /**
      * Define the curriculum routes.
      */
@@ -83,51 +87,54 @@ class InventoryServiceProvider extends ServiceProvider
             });
         }
     }
+
     /**
      * Load package views.
      */
     private function loadViews()
     {
-        $this->loadViewsFrom(SCOOL_INVENTORY_PATH . '/resources/views', 'inventory');
+        $this->loadViewsFrom(SCOOL_INVENTORY_PATH.'/resources/views', 'inventory');
     }
+
     /**
      * Load migrations.
      */
     private function loadMigrations()
     {
-        $this->loadMigrationsFrom(SCOOL_INVENTORY_PATH . '/database/migrations');
+        $this->loadMigrationsFrom(SCOOL_INVENTORY_PATH.'/database/migrations');
     }
+
     /**
      * Publish factories.
      */
     private function publishFactories()
     {
         $this->publishes(
-            ScoolInventory::factories(),"scool_inventory"
+            ScoolInventory::factories(), 'scool_inventory'
         );
     }
+
     /**
      * Publish config.
      */
-    private function publishConfig() {
+    private function publishConfig()
+    {
         $this->publishes(
-            ScoolInventory::configs(),"scool_inventory"
+            ScoolInventory::configs(), 'scool_inventory'
         );
         $this->mergeConfigFrom(
-            SCOOL_INVENTORY_PATH . '/config/inventory.php', 'scool_inventory'
+            SCOOL_INVENTORY_PATH.'/config/inventory.php', 'scool_inventory'
         );
     }
+
     /**
      * Publich tests.
      */
     private function publishTests()
     {
         $this->publishes(
-            [SCOOL_INVENTORY_PATH .'/tests/InventoryTest.php' => 'tests/InventoryTest.php'] ,
+            [SCOOL_INVENTORY_PATH.'/tests/InventoryTest.php' => 'tests/InventoryTest.php'],
             'scool_inventory'
         );
     }
 }
-
-
-
