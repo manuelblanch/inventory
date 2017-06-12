@@ -12,7 +12,7 @@ Acces a la web de presentació https://manuelblanch.github.io/presentation_inven
 Via Composer
 
 ``` bash
-$ composer require scool/inventory
+$ composer require mblanch/inventory
 ```
 
 ## Installation ##
@@ -20,7 +20,7 @@ $ composer require scool/inventory
 In a Laravel project execute: 
 
 ```bash
-composer require scool/inventory
+composer require mblanch/inventory
 ```
 
 Add to file **config/app.php** the InventoryServiceProvider:
