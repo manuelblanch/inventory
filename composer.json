@@ -1,5 +1,5 @@
 {
-    "name": "admin/inventory",
+    "name": "adminlaravel/inventory",
     "type": "library",
     "require": {
         "acacha/names": "dev-master",
