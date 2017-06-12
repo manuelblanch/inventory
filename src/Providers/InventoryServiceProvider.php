@@ -19,6 +19,8 @@ class InventoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
+	include __DIR__.'/routes.php';
+		$this->app->make('Scool\Inventory\InventoryController');
         if (!defined('SCOOL_INVENTORY_PATH')) {
             define('SCOOL_INVENTORY_PATH', realpath(__DIR__.'/../../'));
         }
