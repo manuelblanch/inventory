@@ -104,4 +104,3 @@ Route::get('tasks', 'DashboardController@tasks')->name('tasks');
 
 Route::group(['middleware' => 'web'], function () {
 });
-
