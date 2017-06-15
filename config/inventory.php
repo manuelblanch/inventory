@@ -21,5 +21,6 @@ providers' => [
         // ... other providers
         Illuminate\View\ViewServiceProvider::class,
         Scool\Inventory\InventoryServiceProvider::class,
+];
 
  
