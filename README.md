@@ -15,11 +15,12 @@ $ composer require mblanch/inventory
 
 ## Installation ##
 
-In a Laravel project execute: 
+In a Laravel project execute:
 
 ```bash
 composer require mblanch/inventory
 ```
+This install the package in the carpet vendor.
 
 Add to file **config/app.php** the InventoryServiceProvider:
 
@@ -29,7 +30,7 @@ Add to file **config/app.php** the InventoryServiceProvider:
  * Package Service Providers...
  */
  Scool\Inventory\Providers\InventoryServiceProvider::class,
-... 
+...
 ```
 
 And publish files with:
@@ -46,30 +47,10 @@ Use:
 php artisan migrate:status
 ```
 
-To see curriculum migrations and run migrations with:
+To see inventory migrations and run migrations use the command:
 
 ```bash
 php artisan migrate
 ```
 
 Factories for all models are installed in **database/factories**.
-
-To use Curriculum Seeders modify file **database/seeds/DatabaseSeeder**:
-
-```php
-public function run()
-{
-    $this->call(InventorySeeder::class);
-}
-```
-
-## User configuration ##
-
-Traits to add to User class:
-
-- HasSpecialities
-- 
-
-## Seeders ##
-
-Private data: https://github.com/Institut-Ebre/ebreescool_seeders
