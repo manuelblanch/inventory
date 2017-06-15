@@ -1,8 +1,6 @@
 # :inventory
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/manuelblanch/inventory/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/manuelblanch/inventory/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/manuelblanch/inventory/badges/build.png?b=master)](https://scrutinizer-ci.com/g/manuelblanch/inventory/build-status/master)
 [![StyleCI](https://styleci.io/repos/74695252/shield?branch=master)](https://styleci.io/repos/74695252)
-[![Build Status](https://scrutinizer-ci.com/g/manuelblanch/inventory/badges/build.png?b=master)](https://scrutinizer-ci.com/g/manuelblanch/inventory/build-status/master)
 [![Build Status](https://travis-ci.org/manuelblanch/inventory.svg?branch=master)](https://travis-ci.org/manuelblanch/inventory)
 
 Acces a la web de presentació https://manuelblanch.github.io/presentation_inventory
