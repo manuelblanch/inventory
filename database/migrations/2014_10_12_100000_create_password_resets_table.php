@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInventoryObjectsTable extends Migration
+class CreatePasswordResetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateInventoryObjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('inventory_objects', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token')->index();
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -26,6 +27,6 @@ class CreateInventoryObjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventory_objects');
+        Schema::dropIfExists('password_resets');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInventoryObjectsTable extends Migration
+class CreateBrandTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateInventoryObjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('inventory_objects', function (Blueprint $table) {
+        Schema::create('brand_type', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 80);
+            $table->string('description', 120);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +29,6 @@ class CreateInventoryObjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventory_objects');
+        Schema::dropIfExists('brand_type');
     }
 }

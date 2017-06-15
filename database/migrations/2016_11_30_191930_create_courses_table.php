@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInventoryObjectsTable extends Migration
+class CreateCoursesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateInventoryObjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('inventory_objects', function (Blueprint $table) {
+        Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateInventoryObjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventory_objects');
+        Schema::dropIfExists('courses');
     }
 }
