@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="manuelblanch Test Suite" tests="1" assertions="1" failures="0" errors="0" time="0.002968">
+    <testsuite name="League\Skeleton\ExampleTest" file="/home/manuel/Code/scool/inventory/tests/ExampleTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.002968">
+      <testcase name="testTrueIsTrue" class="League\Skeleton\ExampleTest" file="/home/manuel/Code/scool/inventory/tests/ExampleTest.php" line="10" assertions="1" time="0.002968"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
